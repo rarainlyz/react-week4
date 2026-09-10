@@ -2,7 +2,7 @@ import { Routes, Route } from 'react-router-dom';
 import Navbar from './Component/Navbar';
 import Footer from './Component/Footer';
 import Home from './pages/Home';
-import Movies from './pages/Movies';
+import MovieGallery from './pages/MovieGallery';
 import About from './pages/About';
 import MovieDetail from './pages/MoviesDetail';
 import NotFound from './pages/Notfound';
@@ -14,7 +14,7 @@ function App() {
       <main className="flex-1">
       <Routes>
   <Route path="/" element={<Home />} />
-  <Route path="/movies" element={<Movies />} />
+  <Route path="/movies" element={<MovieGallery />} />
   <Route path="/movies/:id" element={<MovieDetail />} />
   <Route path="/about" element={<About />} />
   <Route path="*" element={<NotFound />} />   {/* ← ดักทุกอย่างที่เหลือ ไว้ล่างสุด */}

@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { movies } from './data';
+import { movies } from '../data';
 
 function MovieGallery() {
   const [index, setIndex] = useState(0);
