@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { movies } from '../data';
+import MovieCard from './MovieCard';
 
 function MovieGallery() {
   const [index, setIndex] = useState(0);
@@ -34,6 +35,7 @@ function MovieGallery() {
       <p className="text-sm text-slate-500">
         เรื่องที่ {index + 1} จาก {movies.length} | {movie.genre}
       </p>
+      <MovieCard title={movie.title} year={movie.year} />
 
       <button onClick={handleMoreClick} className="mt-2 text-sm text-cyan-600">
         {showMore ? 'ซ่อนเรื่องย่อ' : 'อ่านเรื่องย่อ'}
