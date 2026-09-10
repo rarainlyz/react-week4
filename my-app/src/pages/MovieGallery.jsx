@@ -4,7 +4,6 @@ import MovieCard from './MovieCard';
 
 function MovieGallery({ likedMovies, onMovieLike }) {
   const [index, setIndex] = useState(0);
-  const [showMore, setShowMore] = useState(false);
 
   const hasNext = index < movies.length - 1;
 
@@ -16,10 +15,6 @@ function MovieGallery({ likedMovies, onMovieLike }) {
     }
   }
 
-  function handleMoreClick() {
-    setShowMore(!showMore);  // กลับค่า true/false
-  }
-
   const movie = movies[index];   // ค่าที่คำนวณจาก state ไม่ต้องเป็น state เอง
 
   return (
@@ -29,12 +24,6 @@ function MovieGallery({ likedMovies, onMovieLike }) {
         เรื่องถัดไป
       </button>
 
-      <h2 className="mt-4 text-2xl font-bold text-slate-800">
-        {movie.title} <span className="text-slate-400">({movie.year})</span>
-      </h2>
-      <p className="text-sm text-slate-500">
-        เรื่องที่ {index + 1} จาก {movies.length} | {movie.genre}
-      </p>
       <MovieCard
         title={movie.title}
         year={movie.year}
@@ -42,10 +31,6 @@ function MovieGallery({ likedMovies, onMovieLike }) {
         onLike={onMovieLike}
       />
 
-      <button onClick={handleMoreClick} className="mt-2 text-sm text-cyan-600">
-        {showMore ? 'ซ่อนเรื่องย่อ' : 'อ่านเรื่องย่อ'}
-      </button>
-      {showMore && <p className="mt-2 text-slate-700">{movie.detail}</p>}
     </div>
   );
 }
