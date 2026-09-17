@@ -12,13 +12,17 @@ function App() {
   const [likedMovies, setLikedMovies] = useState({});
 
   function handleMovieLike(movie) {
-    setLikedMovies(currentLikes => ({
-      ...currentLikes,
-      [movie.id]: {
-        ...movie,
-        likes: (currentLikes[movie.id]?.likes || 0) + 1,
-      },
-    }));
+    setLikedMovies(currentLikes => {
+      const nextLikes = { ...currentLikes };
+
+      if (nextLikes[movie.id]) {
+        delete nextLikes[movie.id];
+      } else {
+        nextLikes[movie.id] = movie;
+      }
+
+      return nextLikes;
+    });
   }
 
   return (

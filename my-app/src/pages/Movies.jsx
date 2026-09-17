@@ -28,9 +28,14 @@ function MovieGrid({ movies: shownMovies, likedMovies, onMovieLike }) {
             <button
               type="button"
               onClick={() => onMovieLike(movie)}
-              className="w-full rounded-lg bg-pink-100 px-4 py-2 font-semibold text-pink-700 transition hover:bg-pink-200"
+              aria-pressed={Boolean(likedMovies[movie.id])}
+              className={`w-full rounded-lg px-4 py-2 font-semibold transition ${
+                likedMovies[movie.id]
+                  ? 'bg-pink-500 text-white hover:bg-pink-600'
+                  : 'bg-slate-100 text-slate-500 hover:bg-pink-100 hover:text-pink-600'
+              }`}
             >
-              ❤️ {likedMovies[movie.id]?.likes || 0} ถูกใจ
+              {likedMovies[movie.id] ? '♥ ถูกใจแล้ว' : '♡ ถูกใจ'}
             </button>
           </div>
         </article>

@@ -14,7 +14,7 @@ function Home({ likedMovies }) {
             {likedMovieList.map(movie => (
               <li key={movie.title} className="flex justify-between text-slate-700">
                 <span>{movie.title} ({movie.year})</span>
-                <span>❤️ {movie.likes}</span>
+                <span className="text-pink-600">♥ ถูกใจ</span>
               </li>
             ))}
           </ul>
