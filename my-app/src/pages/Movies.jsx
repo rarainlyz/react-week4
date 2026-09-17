@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { movies } from '../data';
 import SearchBox from '../Component/Searchbox';
 
-function MovieGrid({ movies: shownMovies }) {
+function MovieGrid({ movies: shownMovies, likedMovies, onMovieLike }) {
   if (shownMovies.length === 0) {
     return <p className="mt-8 text-center text-slate-400">ไม่พบหนังที่ค้นหา 🔍</p>;
   }
@@ -11,32 +11,35 @@ function MovieGrid({ movies: shownMovies }) {
   return (
     <div className="mt-6 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
       {shownMovies.map(movie => (
-        <Link
-          key={movie.id}
-          to={`/movies/${movie.id}`}
-          className="overflow-hidden rounded-2xl border border-slate-100 bg-white shadow-md transition hover:-translate-y-1 hover:shadow-xl"
-        >
-          {movie.poster ? (
-            <img
-              src={movie.poster}
-              alt={`โปสเตอร์ ${movie.title}`}
-              className="aspect-[2/3] w-full object-cover"
-            />
-          ) : (
-            <div className="flex aspect-[2/3] items-center justify-center bg-slate-200 text-4xl">🎬</div>
-          )}
-          <div className="p-4">
-            <h3 className="text-lg font-bold text-slate-800">{movie.title}</h3>
-            {movie.titleTh && <p className="text-sm text-slate-600">{movie.titleTh}</p>}
-            <p className="mt-1 text-sm text-slate-500">ปี {movie.year} · {movie.genre} · ⭐ {movie.rating}</p>
+        <article key={movie.id} className="overflow-hidden rounded-2xl border border-slate-100 bg-white shadow-md transition hover:-translate-y-1 hover:shadow-xl">
+          <Link to={`/movies/${movie.id}`}>
+            {movie.poster ? (
+              <img src={movie.poster} alt={`โปสเตอร์ ${movie.title}`} className="aspect-[2/3] w-full object-cover" />
+            ) : (
+              <div className="flex aspect-[2/3] items-center justify-center bg-slate-200 text-4xl">🎬</div>
+            )}
+            <div className="p-4 pb-2">
+              <h3 className="text-lg font-bold text-slate-800">{movie.title}</h3>
+              {movie.titleTh && <p className="text-sm text-slate-600">{movie.titleTh}</p>}
+              <p className="mt-1 text-sm text-slate-500">ปี {movie.year} · {movie.genre} · ⭐ {movie.rating}</p>
+            </div>
+          </Link>
+          <div className="px-4 pb-4">
+            <button
+              type="button"
+              onClick={() => onMovieLike(movie)}
+              className="w-full rounded-lg bg-pink-100 px-4 py-2 font-semibold text-pink-700 transition hover:bg-pink-200"
+            >
+              ❤️ {likedMovies[movie.id]?.likes || 0} ถูกใจ
+            </button>
           </div>
-        </Link>
+        </article>
       ))}
     </div>
   );
 }
 
-function Movies() {
+function Movies({ likedMovies, onMovieLike }) {
   const [query, setQuery] = useState('');
 
   const shownMovies = movies.filter(movie =>
@@ -47,7 +50,7 @@ function Movies() {
     <div className="mx-auto max-w-5xl p-8">
       <h1 className="mb-6 text-2xl font-bold text-slate-800">หนังทั้งหมด</h1>
       <SearchBox query={query} onQueryChange={setQuery} />
-      <MovieGrid movies={shownMovies} />
+      <MovieGrid movies={shownMovies} likedMovies={likedMovies} onMovieLike={onMovieLike} />
     </div>
   );
 }

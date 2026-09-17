@@ -5,7 +5,7 @@ function Footer() {
                       text-slate-400 md:grid-cols-3">
         <div>
           <p className="mb-2 font-bold text-white">🎬 MovieHub</p>
-          <p>โปรเจกต์ประกอบวิชา 520 341 <br />Client Side Web Programming</p>
+          <p>โปรเจกต์ประกอบวิชา 520 341 สุดเทพ <br />Client Side Web Programming</p>
         </div>
         <div>
           <p className="mb-2 font-semibold text-slate-200">เมนู</p>
