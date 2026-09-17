@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { movies } from '../data';
 import SearchBox from '../Component/Searchbox';
 import GenreBox from '../Component/Genrebox';
+import ReviewForm from '../Component/ReviewForm';
 
 function MovieGrid({ movies: shownMovies, likedMovies, onMovieLike }) {
   if (shownMovies.length === 0) {
@@ -38,6 +39,9 @@ function MovieGrid({ movies: shownMovies, likedMovies, onMovieLike }) {
             >
               {likedMovies[movie.id] ? '♥ ถูกใจแล้ว' : '♡ ถูกใจ'}
             </button>
+            <div className="mt-4 border-t border-slate-100 pt-4">
+              <ReviewForm movieTitle={movie.title} />
+            </div>
           </div>
         </article>
       ))}
