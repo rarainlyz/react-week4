@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { movies } from '../data';
 import SearchBox from '../Component/Searchbox';
+import GenreBox from '../Component/Genrebox';
 
 function MovieGrid({ movies: shownMovies, likedMovies, onMovieLike }) {
   if (shownMovies.length === 0) {
@@ -46,15 +47,19 @@ function MovieGrid({ movies: shownMovies, likedMovies, onMovieLike }) {
 
 function Movies({ likedMovies, onMovieLike }) {
   const [query, setQuery] = useState('');
+  const [activeGenre, setActiveGenre] = useState('All');
 
-  const shownMovies = movies.filter(movie =>
-    movie.title.toLowerCase().includes(query.toLowerCase())
-  );
+  const shownMovies = movies.filter(movie => {
+    const matchesQuery = movie.title.toLowerCase().includes(query.toLowerCase());
+    const matchesGenre = activeGenre === 'All' || movie.genre === activeGenre;
+    return matchesQuery && matchesGenre;
+  });
 
   return (
     <div className="mx-auto max-w-5xl p-8">
       <h1 className="mb-6 text-2xl font-bold text-slate-800">หนังทั้งหมด</h1>
       <SearchBox query={query} onQueryChange={setQuery} />
+      <GenreBox activeGenre={activeGenre} onChange={setActiveGenre} />
       <MovieGrid movies={shownMovies} likedMovies={likedMovies} onMovieLike={onMovieLike} />
     </div>
   );
